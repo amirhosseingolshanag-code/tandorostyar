@@ -1,0 +1,4 @@
+{% load static %}
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}تندرست‌یار{% endblock %}</title><link rel="stylesheet" href="{% static 'core/style.css' %}"></head>
+<body><header class="top"><a class="brand" href="{% url 'home' %}">🌿 تندرست‌یار</a><nav>{% if user.is_authenticated %}<a href="{% url 'dashboard' %}">داشبورد</a><form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="linkbtn">خروج</button></form>{% else %}<a href="{% url 'login' %}">ورود</a><a href="{% url 'signup' %}">ثبت‌نام</a>{% endif %}</nav></header>
+<main class="container">{% if messages %}{% for message in messages %}<div class="message">{{ message }}</div>{% endfor %}{% endif %}{% block content %}{% endblock %}</main><footer>تندرست‌یار · همراهی برای سبک زندگی سالم‌تر</footer></body></html>

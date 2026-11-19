@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}{{ title }} | تندرست‌یار{% endblock %}{% block content %}<section class="auth panel"><h1>{{ title }}</h1>
+<form method="post">{% csrf_token %}{% if form.non_field_errors %}<div class="errors">{{ form.non_field_errors }}</div>{% endif %}
+{% for field in form %}<label>{{ field.label }}{{ field }}{% if field.help_text %}<small>{{ field.help_text|safe }}</small>{% endif %}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</label>{% endfor %}
+<button class="btn" type="submit">{{ title }}</button></form>{% if signup %}<p>حساب داری؟ <a href="{% url 'login' %}">وارد شو</a></p>{% else %}<p>حساب نداری؟ <a href="{% url 'signup' %}">ثبت‌نام کن</a></p>{% endif %}</section>{% endblock %}

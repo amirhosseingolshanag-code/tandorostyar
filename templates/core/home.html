@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}تندرست‌یار | خانه{% endblock %}{% block content %}
+<section class="hero"><span class="eyebrow">سلامتی، قدم‌به‌قدم</span><h1>برای حال بهتر، از امروز شروع کن.</h1><p>اطلاعات پایه و ترجیحاتت را ثبت کن، روند اندازه‌گیری‌ها را ببین و یک برنامه غذایی نمونه دریافت کن.</p><div class="actions"><a class="btn" href="{% url 'signup' %}">ساخت حساب کاربری</a><a class="btn secondary" href="{% url 'login' %}">ورود به حساب</a></div></section>
+<section class="grid"><article class="panel"><h3>پروفایل شخصی</h3><p>ثبت سن، قد و اطلاعات پایه.</p></article><article class="panel"><h3>روند اندازه‌گیری</h3><p>ثبت وزن و مشاهده سوابق.</p></article><article class="panel"><h3>ترجیحات غذایی</h3><p>انتخاب هدف، فعالیت و نوع رژیم.</p></article></section>
+<p class="disclaimer">توجه: پیشنهادهای این وب‌سایت آموزشی و عمومی‌اند و جایگزین نظر پزشک یا متخصص تغذیه نیستند.</p>{% endblock %}

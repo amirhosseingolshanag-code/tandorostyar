@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}داشبورد | تندرست‌یار{% endblock %}{% block content %}
+<div class="dashhead"><div><span class="eyebrow">فضای شخصی</span><h1>سلام {{ user.first_name|default:user.username }} 👋</h1><p>اطلاعاتت را مدیریت کن و روندت را دنبال کن.</p></div></div>
+{% if bmi %}<section class="panel stat"><div><small>شاخص توده بدنی تقریبی (BMI)</small><strong>{{ bmi }}</strong></div><div><small>آخرین وزن ثبت‌شده</small><strong>{{ latest.weight_kg }} کیلوگرم</strong></div></section>{% endif %}
+<div class="grid two">
+<section class="panel"><h2>اطلاعات پایه</h2><form method="post">{% csrf_token %}<input type="hidden" name="action" value="profile">{{ profile_form.as_p }}<button class="btn">ذخیره پروفایل</button></form></section>
+<section class="panel"><h2>ثبت اندازه‌گیری</h2><form method="post">{% csrf_token %}<input type="hidden" name="action" value="measure">{{ measure_form.as_p }}<button class="btn">ثبت وزن</button></form></section>
+<section class="panel"><h2>ترجیحات غذایی</h2><form method="post">{% csrf_token %}<input type="hidden" name="action" value="diet">{{ diet_form.as_p }}<button class="btn">ذخیره ترجیحات</button></form></section>
+<section class="panel"><h2>تصویر اختیاری بدن</h2><p class="muted">تصاویر خصوصی‌اند؛ در این نسخه روی سرور ذخیره می‌شوند.</p><form method="post" enctype="multipart/form-data">{% csrf_token %}<input type="hidden" name="action" value="image">{{ image_form.as_p }}<button class="btn">بارگذاری تصویر</button></form></section>
+</div>
+<section class="panel"><h2>ساخت برنامه غذایی نمونه</h2><p>این برنامه عمومی است و بر اساس ارزیابی پزشکی شخصی‌سازی نشده است.</p><form method="post">{% csrf_token %}<input type="hidden" name="action" value="plan"><button class="btn">ساخت برنامه نمونه</button></form>
+{% for plan in plans %}<div class="plan"><b>{{ plan.title }} · {{ plan.created_at|date:"Y/m/d" }}</b><ul>{% for meal, food in plan.content.items %}<li>{{ meal }}: {{ food }}</li>{% endfor %}</ul></div>{% empty %}<p class="muted">هنوز برنامه‌ای نساخته‌ای.</p>{% endfor %}</section>
+<section class="panel"><h2>سوابق اندازه‌گیری</h2>{% for m in measurements %}<div class="history"><span>{{ m.measured_at|date:"Y/m/d" }}</span><b>{{ m.weight_kg }} کیلوگرم</b><span>{{ m.note }}</span></div>{% empty %}<p class="muted">هنوز اندازه‌گیری ثبت نشده است.</p>{% endfor %}</section>
+<section class="panel"><h2>تصاویر ثبت‌شده</h2><div class="grid">{% for image in images %}<div><small>{{ image.get_view_display }}</small><p>{{ image.uploaded_at|date:"Y/m/d" }}</p></div>{% empty %}<p class="muted">تصویری ثبت نشده است.</p>{% endfor %}</div></section>
+{% endblock %}
